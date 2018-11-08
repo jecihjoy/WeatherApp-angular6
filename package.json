@@ -1,6 +1,7 @@
 {
   "name": "weather-app",
-  "version": "0.0.0",
+  "version": "1.0.1",
+  "description": "weather app angular 6",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,6 +26,7 @@
     "@angular/router": "^6.1.0",
     "@angular/service-worker": "^6.1.0",
     "core-js": "^2.5.4",
+    "fs": "0.0.1-security",
     "hammerjs": "^2.0.8",
     "ngx-pagination": "^3.2.1",
     "rxjs": "^6.0.0",
