@@ -1,6 +1,6 @@
 {
   "name": "weather-app",
-  "version": "1.0.1-SNAPSHOT",
+  "version": "1.0.1",
   "description": "weather app angular 6",
   "scripts": {
     "ng": "ng",
