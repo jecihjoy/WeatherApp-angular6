@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocationService } from '../services/location.service';
 import { WeatherService } from '../services/weather.service';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-current-weather',
@@ -18,22 +19,24 @@ export class CurrentWeatherComponent implements OnInit {
   locations = [];
   weather = {}
   cityName: number;
-  subscription: any;
   suggestionDiv: boolean = true;
   reccommendation = '';
   title: string;
+  subscription: Subscription;
 
 
   constructor(private locationService: LocationService,
     private fBuilder: FormBuilder,
     private weatherService: WeatherService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+    this.subscription = new Subscription();
+  }
 
   ngOnInit() {
     this.searchField = new FormControl;
     this.searchForm = this.fBuilder.group({ search: this.searchField });
 
-    this.searchField.valueChanges.pipe(debounceTime(20), distinctUntilChanged(),
+    this.subscription.add(this.searchField.valueChanges.pipe(debounceTime(20), distinctUntilChanged(),
       switchMap(term => this.locationService.searchPlaces(term)))
       .subscribe((resultValue) => {
         this.locations = [];
@@ -49,9 +52,9 @@ export class CurrentWeatherComponent implements OnInit {
             this.locations.push(locationObj);
           }
         });
-      });
+      }));
 
-    this.subscription = this.route.paramMap
+    this.subscription.add(this.subscription.add(this.route.paramMap
       .subscribe(params => {
         console.log('city', params.get('city'));
         if (params.get('city') === 'eldoret') {
@@ -80,11 +83,12 @@ export class CurrentWeatherComponent implements OnInit {
             })
           })
         }
-      });
+      }))
+    )
   }
 
   getWeatherByLocation(long: any, lat: any) {
-    this.weatherService.getCurrentByLocation(long, lat)
+    this.subscription.add(this.weatherService.getCurrentByLocation(long, lat)
       .subscribe((data) => {
         var weatherObj = {};
         weatherObj['w_date'] = data.dt;
@@ -99,7 +103,7 @@ export class CurrentWeatherComponent implements OnInit {
         weatherObj['w_clouds'] = data.clouds.all;
         this.weather = weatherObj;
         this.reccommendation = this.returnRecommentation(this.weather);
-      })
+      }))
   }
 
   returnRecommentation(weather) {
@@ -120,5 +124,9 @@ export class CurrentWeatherComponent implements OnInit {
 
   func() {
     this.suggestionDiv = false;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 }
