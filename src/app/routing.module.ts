@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MapWeatherComponent } from './map-weather/map-weather.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'weather', pathMatch: 'full' },
+  { path: '', redirectTo: 'weather/eldoret', pathMatch: 'full' },
   { path: 'weather/eldoret', component: CurrentWeatherComponent },
   { path: 'weather/:city', component: CurrentWeatherComponent },
-  { path: 'weather-map', component: MapWeatherComponent }
+  { path: 'weather-map', loadChildren: './map-weather/map-weather.module#WeatherMapModule' }
 ]
 @NgModule({
   imports: [

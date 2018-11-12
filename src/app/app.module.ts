@@ -6,14 +6,11 @@ import { RoutingModule } from './routing.module';
 import { MaterialModule } from './material.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import 'hammerjs';
-
-import { LocationService } from './services/location.service';
-import { WeatherService } from './services/weather.service';
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
-import { MapWeatherComponent } from './map-weather/map-weather.component';
 import { CityWeatherComponent } from './city-weather/city-weather.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -24,7 +21,6 @@ import { MoodWeatherComponent } from './mood-weather/mood-weather.component';
     AppComponent,
     WeatherForecastComponent,
     CurrentWeatherComponent,
-    MapWeatherComponent,
     CityWeatherComponent,
     MoodWeatherComponent
   ],
@@ -36,10 +32,10 @@ import { MoodWeatherComponent } from './mood-weather/mood-weather.component';
     MaterialModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    SharedModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LocationService,
-    WeatherService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
