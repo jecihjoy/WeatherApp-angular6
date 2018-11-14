@@ -8,15 +8,11 @@ describe('MoodWeatherComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MoodWeatherComponent ]
+      declarations: [MoodWeatherComponent]
     })
-    .compileComponents();
-    component = TestBed.get(MoodWeatherComponent);
-  }));
-
-  beforeEach(() => {
+      .compileComponents();
     fixture = TestBed.createComponent(MoodWeatherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 });

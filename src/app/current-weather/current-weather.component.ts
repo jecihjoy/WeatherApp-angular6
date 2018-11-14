@@ -90,6 +90,7 @@ export class CurrentWeatherComponent implements OnInit {
   getWeatherByLocation(long: any, lat: any) {
     this.subscription.add(this.weatherService.getCurrentByLocation(long, lat)
       .subscribe((data) => {
+        console.log('current data', data);
         var weatherObj = {};
         weatherObj['w_date'] = data.dt;
         weatherObj['w_main'] = data.weather[0].main;

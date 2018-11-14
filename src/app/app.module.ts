@@ -22,7 +22,7 @@ import { MoodWeatherComponent } from './mood-weather/mood-weather.component';
     WeatherForecastComponent,
     CurrentWeatherComponent,
     CityWeatherComponent,
-    MoodWeatherComponent
+    MoodWeatherComponent,
   ],
   imports: [
     BrowserModule,
