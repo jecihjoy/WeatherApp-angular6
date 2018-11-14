@@ -11,26 +11,18 @@ const httpOptions = {
 })
 export class LocationService {
 
-  private SEARCHURL = 'https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA';
+  SEARCHURL = 'https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA';
   
   constructor(private httpClient: HttpClient) { }
 
-  getLocations(term: string): Observable<Location[]>{
-    let url = `${this.SEARCHURL}&q=${term}`;
-    console.log('loc url', url);
-    return this.httpClient.get<Location[]>(url);
-  }
-
   searchPlaces(term: string){
     if(term.trim()){
-      console.log('loc url', `${this.SEARCHURL}&q=${term}`);
     return this.httpClient.get(`${this.SEARCHURL}&q=${term}`).pipe(tap());
     }
   }
 
   getCityLocation(cityname: string){
     let url = `${this.SEARCHURL}&q=${cityname}`;
-    console.log('loc url', url);
     return this.httpClient.get(url);
   }
   

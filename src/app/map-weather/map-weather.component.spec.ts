@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { LocationService } from '../services/location.service';
 import { MapWeatherComponent } from './map-weather.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('MapWeatherComponent', () => {
   let component: MapWeatherComponent;
@@ -8,15 +9,25 @@ describe('MapWeatherComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapWeatherComponent ]
+      imports: [HttpClientTestingModule],
+      providers: [LocationService],
+      declarations: [MapWeatherComponent]
     })
-    .compileComponents();
-    component = TestBed.get(MapWeatherComponent);
-  }));
-
-  beforeEach(() => {
+      .compileComponents();
     fixture = TestBed.createComponent(MapWeatherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
+
+  it('should be created', () => {
+    expect(component).toBeDefined();
+  })
+
+  it('should display text in p tags', () => {
+    let p: HTMLElement;
+    p = fixture.nativeElement.querySelector('p');
+    // fixture.detectChanges();
+    expect(p.textContent).toContain(component.title);
+  })
+
 });

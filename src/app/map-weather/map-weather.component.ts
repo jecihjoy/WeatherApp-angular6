@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class MapWeatherComponent implements OnInit {
 subscription: Subscription;
+title = 'map-weather is working!';
 
   constructor( private locationService: LocationService) {
     this.subscription = new Subscription();

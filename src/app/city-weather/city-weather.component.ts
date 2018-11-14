@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./city-weather.component.css']
 })
 export class CityWeatherComponent implements OnInit {
+  title = 'well';
   private city = 'eldoret';
   searchField: FormControl;
   searchForm: FormGroup;

@@ -4,6 +4,7 @@ import { LocationService } from '../services/location.service';
 import { FormBuilder } from '@angular/forms';
 import { WeatherService } from '../services/weather.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-weather-forecast',
@@ -12,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WeatherForecastComponent implements OnInit {
   city = '';
-  subscription: any;
+  subscription: Subscription;
   forecastData = [];
   weekData = [];
   page: number = 1;
@@ -24,7 +25,7 @@ export class WeatherForecastComponent implements OnInit {
 
   ngOnInit() {
 
-    this.subscription = this.route.paramMap
+    this.subscription.add(this.subscription = this.route.paramMap
       .subscribe(params => {
         if (params.get('city') === 'eldoret') {
           this.city = 'Eldoret';
@@ -66,12 +67,13 @@ export class WeatherForecastComponent implements OnInit {
             })
           })
         }
-      });
+      })
+    );
 
   }
 
   getWeatherForecast(long: any, lat: any) {
-    this.weatherService.getWeatherForecast(long, lat)
+    this.subscription.add(this.weatherService.getWeatherForecast(long, lat)
       .subscribe((val) => {
         console.log('fe', val)
         var dat = JSON.parse(JSON.stringify(val))
@@ -99,6 +101,7 @@ export class WeatherForecastComponent implements OnInit {
         console.log('forecased', this.weekData);
 
       })
+    );
   }
 
 }

@@ -1,0 +1,197 @@
+[
+    {
+        "coord": {
+            "lon": 34.77,
+            "lat": -0.68
+        },
+        "weather": [
+            {
+                "id": 803,
+                "main": "Clouds",
+                "description": "broken clouds",
+                "icon": "04d"
+            }
+        ],
+        "base": "stations",
+        "main": {
+            "temp": 302.15,
+            "pressure": 1011,
+            "humidity": 51,
+            "temp_min": 302.15,
+            "temp_max": 302.15
+        },
+        "visibility": 10000,
+        "wind": {
+            "speed": 2.1,
+            "deg": 270
+        },
+        "clouds": {
+            "all": 75
+        },
+        "dt": 1542189600,
+        "sys": {
+            "type": 1,
+            "id": 6411,
+            "message": 0.0025,
+            "country": "KE",
+            "sunrise": 1542165655,
+            "sunset": 1542209389
+        },
+        "id": 191299,
+        "name": "Kisii",
+        "cod": 200
+    },
+    [
+        {
+            "currentWeather": {
+                "coord": {
+                    "lon": -73.98,
+                    "lat": 40.75
+                },
+                "weather": [
+                    {
+                        "id": 800,
+                        "main": "Clear",
+                        "description": "clear sky",
+                        "icon": "01n"
+                    }
+                ],
+                "base": "stations",
+                "main": {
+                    "temp": 272.41,
+                    "pressure": 1030,
+                    "humidity": 85,
+                    "temp_min": 268.75,
+                    "temp_max": 277.05
+                },
+                "visibility": 16093,
+                "wind": {
+                    "speed": 2.23,
+                    "deg": 235.507
+                },
+                "clouds": {
+                    "all": 1
+                },
+                "dt": 1542021300,
+                "sys": {
+                    "type": 1,
+                    "id": 1969,
+                    "message": 0.0057,
+                    "country": "US",
+                    "sunrise": 1542022790,
+                    "sunset": 1542058797
+                },
+                "id": 5125125,
+                "name": "Long Island City",
+                "cod": 200
+            }
+        },
+        {
+            "currentWeather": {
+                "coord": {
+                    "lon": -73.98,
+                    "lat": 40.75
+                },
+                "weather": [
+                    {
+                        "id": 800,
+                        "main": "Clear",
+                        "description": "clear sky",
+                        "icon": "01n"
+                    }
+                ],
+                "base": "stations",
+                "main": {
+                    "temp": 272.41,
+                    "pressure": 1030,
+                    "humidity": 85,
+                    "temp_min": 268.75,
+                    "temp_max": 277.05
+                },
+                "visibility": 16093,
+                "wind": {
+                    "speed": 2.23,
+                    "deg": 235.507
+                },
+                "clouds": {
+                    "all": 1
+                },
+                "dt": 1542021300,
+                "sys": {
+                    "type": 1,
+                    "id": 1969,
+                    "message": 0.0057,
+                    "country": "US",
+                    "sunrise": 1542022790,
+                    "sunset": 1542058797
+                },
+                "id": 5125125,
+                "name": "Long Island City",
+                "cod": 200
+            }
+        },
+        {
+            "coord": {
+                "lon": 35.11,
+                "lat": 56.8
+            },
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "overcast clouds",
+                    "icon": "04d"
+                }
+            ],
+            "base": "stations",
+            "main": {
+                "temp": 271.397,
+                "pressure": 1028.3,
+                "humidity": 64,
+                "temp_min": 271.397,
+                "temp_max": 271.397,
+                "sea_level": 1048.45,
+                "grnd_level": 1028.3
+            },
+            "wind": {
+                "speed": 9.86,
+                "deg": 203.501
+            },
+            "clouds": {
+                "all": 88
+            },
+            "dt": 1542099308,
+            "sys": {
+                "message": 0.0022,
+                "country": "RU",
+                "sunrise": 1542086154,
+                "sunset": 1542115864
+            },
+            "id": 510149,
+            "name": "Petropavlovskoye",
+            "cod": 200
+        }
+    ],
+    [
+        {
+            "w_id": 1,
+            "w_date": "29-10-2018",
+            "w_temp": "34.67",
+            "w_main": "Rain",
+            "w_description": "Rainy",
+            "id": 1,
+            "mood": "cool",
+            "activity": "going to work\r\ngoing shopping"
+        },
+        {
+            "w_id": 1,
+            "w_date": "29-10-2018",
+            "w_temp": "34.67",
+            "w_main": "Rain",
+            "w_description": "Rainy",
+            "id": 3,
+            "mood": "cool",
+            "activity": "going to work\r\ngoing shopping"
+        }
+    ]
+]
