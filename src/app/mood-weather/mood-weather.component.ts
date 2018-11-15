@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { WeatherService } from '../services/weather.service';
 
 @Component({
@@ -11,8 +11,8 @@ export class MoodWeatherComponent implements OnInit {
   savedData = [];
   page: number = 1;
   weather: any;
-  mood = new FormControl('');
-  activities = new FormControl('');
+  mood = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  activities = new FormControl('', [Validators.required, Validators.minLength(5)]);
 
   weatherForm: FormGroup = this.fBuilder.group({
     mood: this.mood,
@@ -31,7 +31,7 @@ export class MoodWeatherComponent implements OnInit {
     const weatherInfo = {
       'temp': this.weather.w_temp,
       'main': this.weather.w_main,
-      'desc':this.weather.w_desc
+      'desc': this.weather.w_desc
     }
 
     const moodInfo = {
@@ -63,7 +63,7 @@ export class MoodWeatherComponent implements OnInit {
       })
   }
 
-  getSavedData(){
+  getSavedData() {
     this.weatherService.getSavedData().subscribe((data) => {
       console.log('data data', data);
       data.forEach(dat => {

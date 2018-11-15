@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./city-weather.component.css']
 })
 export class CityWeatherComponent implements OnInit {
-  title = 'well';
   private city = 'eldoret';
   searchField: FormControl;
   searchForm: FormGroup;
@@ -27,7 +26,7 @@ export class CityWeatherComponent implements OnInit {
     private fBuilder: FormBuilder,
     private weatherService: WeatherService,
     private route: ActivatedRoute) {
-    this.cityName = this.route.snapshot.paramMap.get('city')
+    // this.cityName = this.route.snapshot.paramMap.get('city')
     this.subscription = new Subscription();
   }
 
@@ -55,26 +54,6 @@ export class CityWeatherComponent implements OnInit {
         }))
     this.getCurrentWeather(this.city);
   }
-
-  getWeatherByLocation(long: any, lat: any) {
-    this.subscription.add(
-      this.weatherService.getCurrentByLocation(long, lat)
-        .subscribe((data) => {
-          console.log('eldoret', data);
-          var weatherObj = {};
-          weatherObj['w_main'] = data.weather[0].main;
-          weatherObj['w_desc'] = data.weather[0].description;
-          weatherObj['icon'] = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-          weatherObj['w_temp'] = data.main.temp;
-          weatherObj['w_mintemp'] = data.main.temp_min;
-          weatherObj['w_maxtemp'] = data.main.temp_max;
-          weatherObj['w_humidity'] = data.main.humidity;
-          weatherObj['w_visibility'] = data.visibility;
-          weatherObj['w_clouds'] = data.clouds.all;
-          this.weather = weatherObj;
-          console.log(this.weather);
-        }))
-  }
   getCurrentWeather(cityName) {
     this.subscription.add(
       this.weatherService.getCurrentByCityName(cityName)
@@ -93,6 +72,7 @@ export class CityWeatherComponent implements OnInit {
           this.weather = weatherObj;
           console.log(this.weather);
         }))
+        return this.weather;
   }
 
   ngOnDestroy() {

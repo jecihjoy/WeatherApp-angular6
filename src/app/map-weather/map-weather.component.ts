@@ -16,15 +16,5 @@ title = 'map-weather is working!';
    }
 
   ngOnInit() {
-    this.getLocations('eldoret');
-  }
-
-  getLocations(town){
-    this.subscription.add(
-      this.locationService.getCityLocation(town)
-      .subscribe((data) => {
-        console.log('weatherdata', data);
-      })
-    )
   }
 }
