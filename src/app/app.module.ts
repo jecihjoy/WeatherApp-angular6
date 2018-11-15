@@ -11,7 +11,6 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { WeatherForecastComponent } from './weather-forecast/weather-forecast.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
-import { CityWeatherComponent } from './city-weather/city-weather.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MoodWeatherComponent } from './mood-weather/mood-weather.component';
@@ -21,8 +20,7 @@ import { MoodWeatherComponent } from './mood-weather/mood-weather.component';
     AppComponent,
     WeatherForecastComponent,
     CurrentWeatherComponent,
-    CityWeatherComponent,
-    MoodWeatherComponent,
+    MoodWeatherComponent
   ],
   imports: [
     BrowserModule,
