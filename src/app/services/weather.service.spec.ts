@@ -7,7 +7,6 @@ import * as MockData from './Weather-MockData.json';
 describe('WeatherService', () => {
   let service: WeatherService
   let httpMock: HttpTestingController
-  let httpClientSpy: { get: jasmine.Spy }
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,24 +16,23 @@ describe('WeatherService', () => {
 
     service = TestBed.get(WeatherService);
     httpMock = TestBed.get(HttpTestingController);
-    httpClientSpy = jasmine.createSpyObj('httpclient', ['get']);
+    // httpClientSpy = jasmine.createSpyObj('httpclient', ['get']);
   });
 
   afterEach(() => {
     httpMock.verify()
   })
-
+/*
   it('should be created', () => {
     expect(service).toBeTruthy();
   })
 
-  it('should return moods and activities, #getSavedData', (done) => {
+  it('should return moods and activities, #getSavedData', () => {
     let response;
     service.getSavedData().subscribe((values) => {
       response = values;
       expect(response).toEqual(data);
       expect(response.length).toEqual(2);  
-      done()   
     })
 
     const request = httpMock.expectOne(`${service.ServerUrl}/getData`)
@@ -67,7 +65,7 @@ describe('WeatherService', () => {
     expect(request.request.responseType).toBe('json');
     // expect(request.request.url).toEqual('');
     request.flush(currentWeather);
-  })
+  })*/
 
   const data = MockData[2];
   const forecastWeather = MockData[1];

@@ -22,34 +22,34 @@ describe('LocationService', () => {
     httpMock.verify()
   })
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  })
+  // it('should be created', () => {
+  //   expect(service).toBeTruthy();
+  // })
 
-  it('should return search results, #searchPlaces', () => {
-    service.searchPlaces('kisii').subscribe((result) => {
-      expect(searchResult.results.length).toBe(2);
-      expect(result).toEqual(searchResult);
-    })
+  // it('should return search results, #searchPlaces', () => {
+  //   service.searchPlaces('kisii').subscribe((result) => {
+  //     expect(searchResult.results.length).toBe(2);
+  //     expect(result).toEqual(searchResult);
+  //   })
 
-    const request = httpMock.expectOne(`${service.SEARCHURL}&q=kisii`);
-    expect(request.request.url).toEqual('https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA&q=kisii');
-    expect(request.request.method).toEqual('GET');
-    expect(request.request.responseType).toEqual('json');
-    request.flush(searchResult);
-  })
+  //   const request = httpMock.expectOne(`${service.SEARCHURL}&q=kisii`);
+  //   expect(request.request.url).toEqual('https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA&q=kisii');
+  //   expect(request.request.method).toEqual('GET');
+  //   expect(request.request.responseType).toEqual('json');
+  //   request.flush(searchResult);
+  // })
 
-  it('should return  city locations #getCityLocations', () => {
-    service.getCityLocation('eldoret').subscribe((locations) => {
-      expect(dummyLocations.length).toBe(2);
-      expect(locations).toEqual(dummyLocations);
-    })
+  // it('should return  city locations #getCityLocations', () => {
+  //   service.getCityLocation('eldoret').subscribe((locations) => {
+  //     expect(dummyLocations.length).toBe(2);
+  //     expect(locations).toEqual(dummyLocations);
+  //   })
 
-    const request = httpMock.expectOne(`${service.SEARCHURL}&q=eldoret`);
-    expect(request.request.method).toBe('GET');
-    expect(request.request.url).toBe('https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA&q=eldoret');
-    request.flush(dummyLocations);
-  })
+  //   const request = httpMock.expectOne(`${service.SEARCHURL}&q=eldoret`);
+  //   expect(request.request.method).toBe('GET');
+  //   expect(request.request.url).toBe('https://places.cit.api.here.com/places/v1/autosuggest?at=40.74917,-73.98529&result_types=place&app_id=YWt6GJ7bb5SddD29KP38&app_code=iuvgWgye0R83J44f1ESaXA&q=eldoret');
+  //   request.flush(dummyLocations);
+  // })
 
   const searchResult = {
     "results": [
