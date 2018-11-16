@@ -19,12 +19,16 @@ export class WeatherForecastComponent implements OnInit {
   page: number = 1;
 
   constructor(private locationService: LocationService,
-    private fBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private weatherService: WeatherService) { }
+    private weatherService: WeatherService) {
+      this.subscription = new Subscription()
+     }
 
   ngOnInit() {
+    this.callWeatherForecastWithLocation();
+  }
 
+  callWeatherForecastWithLocation(){
     this.subscription.add(this.subscription = this.route.paramMap
       .subscribe(params => {
         if (params.get('city') === 'eldoret') {
@@ -36,40 +40,11 @@ export class WeatherForecastComponent implements OnInit {
             var locationsData = JSON.parse(JSON.stringify(data));
             let lat = locationsData.results[0].position[0];
             let long = locationsData.results[0].position[1];
-            this.weatherService.getWeatherForecast(long, lat).subscribe((data) => {
-              this.forecastData = [];
-              var dat = JSON.parse(JSON.stringify(data))
-              dat.list.forEach((value) => {
-                var weatherObj = {};
-                weatherObj['w_date'] = value.dt;
-                weatherObj['w_main'] = value.weather[0].main;
-                weatherObj['w_desc'] = value.weather[0].description;
-                weatherObj['icon'] = `http://openweathermap.org/img/w/${value.weather[0].icon}.png`;
-                weatherObj['w_temp'] = value.main.temp.toFixed(2);
-                weatherObj['w_mintemp'] = value.main.temp_min.toFixed(2);
-                weatherObj['w_maxtemp'] = value.main.temp_max.toFixed(2);
-                weatherObj['w_humidity'] = value.main.humidity;
-                weatherObj['w_visibility'] = value.visibility;
-                weatherObj['w_clouds'] = value.clouds.all;
-                this.forecastData.push(weatherObj);
-              })
-
-              this.weekData = [];
-              this.weekData.push(this.forecastData[3]);
-              this.weekData.push(this.forecastData[11]);
-              this.weekData.push(this.forecastData[19]);
-              this.weekData.push(this.forecastData[27]);
-              this.weekData.push(this.forecastData[35]);
-              console.log('forecaseddata', this.forecastData);
-              console.log('forecased', this.weekData);
-
-              //console.log('awsnap', localForecast.length);
-            })
+            this.getWeatherForecast(long, lat);
           })
         }
       })
     );
-
   }
 
   getWeatherForecast(long: any, lat: any) {
@@ -99,6 +74,8 @@ export class WeatherForecastComponent implements OnInit {
         this.weekData.push(this.forecastData[35]);
         console.log('forecaseddata', this.forecastData);
         console.log('forecased', this.weekData);
+              //console.log('awsnap', localForecast.length);
+
 
       })
     );

@@ -9,8 +9,9 @@ import { WeatherService } from '../services/weather.service';
 })
 export class MoodWeatherComponent implements OnInit {
   savedData = [];
+  testData: any = [];
   page: number = 1;
-  weather: any;
+  weather: any = {}
   mood = new FormControl('', [Validators.required, Validators.minLength(5)]);
   activities = new FormControl('', [Validators.required, Validators.minLength(5)]);
 
@@ -60,7 +61,11 @@ export class MoodWeatherComponent implements OnInit {
         weatherObj['icon'] = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
         weatherObj['w_temp'] = data.main.temp;
         this.weather = weatherObj;
+        this.testData = data;
+      console.log('DATA', this.testData);
+
       })
+      return this.weather;
   }
 
   getSavedData() {

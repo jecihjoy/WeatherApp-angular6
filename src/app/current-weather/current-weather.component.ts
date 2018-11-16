@@ -7,6 +7,7 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { WeatherI } from '../modals/weather';
 
 @Component({
   selector: 'app-current-weather',
@@ -22,27 +23,52 @@ export class CurrentWeatherComponent implements OnInit {
   suggestionDiv: boolean = true;
   reccommendation = '';
   title: string;
-  subscription: Subscription;
+  subscription: Subscription = new Subscription();
 
 
   constructor(private locationService: LocationService,
     private fBuilder: FormBuilder,
     private weatherService: WeatherService,
     private route: ActivatedRoute) {
-    this.subscription = new Subscription();
   }
 
   ngOnInit() {
     this.searchField = new FormControl;
     this.searchForm = this.fBuilder.group({ search: this.searchField });
 
+    this.getLocations();
+
+    this.getWeather();
+  }
+
+
+  getWeatherByLocation(long: any, lat: any) {
+    this.subscription.add(this.weatherService.getCurrentByLocation(long, lat)
+      .subscribe((data) => {
+        var weatherObj = {};
+        weatherObj['w_date'] = data.dt;
+        weatherObj['w_main'] = data.weather[0].main;
+        weatherObj['w_desc'] = data.weather[0].description;
+        weatherObj['icon'] = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+        weatherObj['w_temp'] = data.main.temp;
+        weatherObj['w_mintemp'] = data.main.temp_min;
+        weatherObj['w_maxtemp'] = data.main.temp_max;
+        weatherObj['w_humidity'] = data.main.humidity;
+        weatherObj['w_visibility'] = data.visibility;
+        weatherObj['w_clouds'] = data.clouds.all;
+        this.weather = weatherObj;
+        this.reccommendation = this.returnRecommentation(this.weather);
+      })
+    )
+  }
+
+  getLocations() {
     this.subscription.add(this.searchField.valueChanges.pipe(debounceTime(20), distinctUntilChanged(),
       switchMap(term => this.locationService.searchPlaces(term)))
       .subscribe((resultValue) => {
         this.locations = [];
         this.suggestionDiv = true;
         var locationsData = JSON.parse(JSON.stringify(resultValue));
-        console.log('locationsdata', locationsData);
         locationsData.results.forEach(element => {
           var locationObj = {};
           locationObj['latitude'] = element.position[0];
@@ -53,15 +79,16 @@ export class CurrentWeatherComponent implements OnInit {
           }
         });
       }));
+  }
 
+  getWeather() {
     this.subscription.add(this.subscription.add(this.route.paramMap
       .subscribe(params => {
-        console.log('city', params.get('city'));
         if (params.get('city') === 'eldoret') {
           this.title = 'Eldoret';
           this.getWeatherByLocation(35.27, 0.52);
         } else {
-          this.title = params.get('city');
+          this.title = "Eldoret";
           this.locationService.getCityLocation(this.title).subscribe((data) => {
             var locationsData = JSON.parse(JSON.stringify(data));
             let lat = locationsData.results[0].position[0];
@@ -79,32 +106,11 @@ export class CurrentWeatherComponent implements OnInit {
               weatherObj['w_clouds'] = data.clouds.all;
               this.weather = weatherObj;
               this.reccommendation = this.returnRecommentation(this.weather);
-              console.log('current weather', this.weather);
             })
           })
         }
       }))
     )
-  }
-
-  getWeatherByLocation(long: any, lat: any) {
-    this.subscription.add(this.weatherService.getCurrentByLocation(long, lat)
-      .subscribe((data) => {
-        console.log('current data', data);
-        var weatherObj = {};
-        weatherObj['w_date'] = data.dt;
-        weatherObj['w_main'] = data.weather[0].main;
-        weatherObj['w_desc'] = data.weather[0].description;
-        weatherObj['icon'] = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-        weatherObj['w_temp'] = data.main.temp;
-        weatherObj['w_mintemp'] = data.main.temp_min;
-        weatherObj['w_maxtemp'] = data.main.temp_max;
-        weatherObj['w_humidity'] = data.main.humidity;
-        weatherObj['w_visibility'] = data.visibility;
-        weatherObj['w_clouds'] = data.clouds.all;
-        this.weather = weatherObj;
-        this.reccommendation = this.returnRecommentation(this.weather);
-      }))
   }
 
   returnRecommentation(weather) {

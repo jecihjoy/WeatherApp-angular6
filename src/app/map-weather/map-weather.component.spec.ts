@@ -25,8 +25,8 @@ describe('MapWeatherComponent', () => {
 
   it('should display text in p tags', () => {
     let p: HTMLElement;
+    // expect(de.query(By.css('p')).nativeElement.innerText).toBe('dash works!');
     p = fixture.nativeElement.querySelector('p');
-    // fixture.detectChanges();
     expect(p.textContent).toContain(component.title);
   })
 

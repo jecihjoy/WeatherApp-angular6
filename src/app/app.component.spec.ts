@@ -29,10 +29,10 @@ describe('AppComponent', () => {
    expect(variable).not.toBeNull();
   })
 
-  it('should have a route that points to weatherMap page', () => {
+  /*it('should have a route that points to weatherMap page', () => {
     let elements = fixture.debugElement.queryAll(By.directive(RouterLinkWithHref));
     let index = elements.findIndex(i => i.properties['href'] === '/weather-map');
     expect(index).toBe(0);
     // expect(index).toBeGreaterThan(0);
-  })
+  })*/
 });

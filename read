@@ -38,3 +38,20 @@ testing
 => USE component fixtures
 	A fixture is a wrapper for a component and it’s template.
   We create an instance of a component fixture through the TestBedtor.
+
+
+  a) detectChanges
+  b) fixture when stable
+
+
+  routing error https://stackoverflow.com/questions/47942482/karma-typeerror-cannot-read-property-subscribe-of-undefined?rq=1
+
+
+  currentComponent
+  1. Subscription
+  2. getWeatherByLocation, weather
+
+  3. getLocation, locations
+  
+  4. ggetWeather, weather, recomemndation
+  5. return recomendation, return a string
